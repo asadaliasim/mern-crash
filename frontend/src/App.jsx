@@ -1,7 +1,11 @@
+import Header from './components/Header';
+import HomeScreen from './screens/HomeScreen';
+
 function App() {
   return (
     <>
-      <h1>Mern auth</h1>
+      <Header />
+      <HomeScreen />
     </>
   );
 }
