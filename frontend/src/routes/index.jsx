@@ -3,6 +3,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import { Layout } from '../layout';
 
 import HomeScreen from '../screens/HomeScreen';
+import LoginScreen from '../screens/LoginScreen';
+import RegisterScreen from '../screens/RegisterScreen';
 
 const router = createBrowserRouter([
   {
@@ -12,6 +14,16 @@ const router = createBrowserRouter([
         path: '/',
         index: true,
         element: <HomeScreen />,
+      },
+      {
+        path: '/login',
+
+        element: <LoginScreen />,
+      },
+      {
+        path: '/register',
+
+        element: <RegisterScreen />,
       },
 
       {
