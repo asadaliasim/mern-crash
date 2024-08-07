@@ -7,7 +7,20 @@ import generateToken from '../utils/generateToken.js';
 // route    POST /api/users/auth
 // @access  public
 const authUser = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: 'Auth User' });
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (!user || !(await user.matchPassword(password))) {
+    res.status(401);
+    throw new Error('Invalid email or password');
+  }
+  generateToken(res, user._id);
+  return res.status(200).json({
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+  });
 });
 
 // @desc    Register a new user
@@ -42,7 +55,12 @@ const registerUser = asyncHandler(async (req, res) => {
 // route    POST /api/users/logout
 // @access  public
 const logoutUser = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: 'logout User' });
+  // set the cookies empty right away
+  res.cookie('jwt', '', {
+    httpOnly: true,
+    expires: new Date(0),
+  });
+  res.status(200).json({ message: 'user logged out' });
 });
 
 // @desc    Get user profile
