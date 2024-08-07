@@ -1,11 +1,11 @@
-import Header from './components/Header';
-import HomeScreen from './screens/HomeScreen';
+import { RouterProvider } from 'react-router-dom';
+
+import router from './routes';
 
 function App() {
   return (
     <>
-      <Header />
-      <HomeScreen />
+      <RouterProvider router={router} />
     </>
   );
 }
