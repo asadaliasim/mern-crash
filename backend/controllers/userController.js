@@ -1,6 +1,7 @@
 // @desc asyncHandler eliminates try catch and automatically throws err in error route (i-e error middleware)
 import asyncHandler from 'express-async-handler';
 import User from '../models/userModel.js';
+import generateToken from '../utils/generateToken.js';
 
 // @desc    Auth user/set token
 // route    POST /api/users/auth
@@ -29,7 +30,7 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error('invalid user data');
   }
-
+  generateToken(res, user._id);
   return res.status(201).json({
     _id: user._id,
     name: user.name,
